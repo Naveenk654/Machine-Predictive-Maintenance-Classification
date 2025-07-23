@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-API_URL="http://localhost:8000/predict"
+API_URL = "https://machine-predictive-maintenance-i9kc.onrender.com/predict"
 st.set_page_config(page_title='Machine Predictive Maintenance Classification')
 st.title('Machine Predictive Maintenance Classification')
 st.write("This is a simple web application that uses a machine learning model to classify machine failures.")
