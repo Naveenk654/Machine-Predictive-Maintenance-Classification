@@ -5,12 +5,12 @@ from pydantic import BaseModel, Field
 import pandas as pd
 import pickle
 app=FastAPI()
-with open('performance.pkl', 'rb') as f:
+with open('model.pkl', 'rb') as f:
     model = pickle.load(f)
 with open("label_encoder.pkl", "rb") as f:
     label_encoder = pickle.load(f)    
 class UserInput(BaseModel):
-    Type: str
+    Type: str=Field(...)
     Air_temperature: float = Field(..., alias="Air temperature [K]")
     Process_temperature: float = Field(..., alias="Process temperature [K]")
     Rotational_speed: float = Field(..., alias="Rotational speed [rpm]")
@@ -30,7 +30,6 @@ def pred_failure_type(input_data: UserInput):
  
     
     failure_label = str(label_encoder.inverse_transform([prediction])[0])
-    print("Encoder classes:", label_encoder.classes_)
-    print("Raw model prediction:", prediction)
+   
     return {"predicted_failure_type": failure_label}
 
